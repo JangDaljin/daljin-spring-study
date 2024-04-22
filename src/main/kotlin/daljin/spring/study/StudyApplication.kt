@@ -15,11 +15,6 @@ class StudyApplication {
             runApplication<StudyApplication>(*args)
         }
     }
-
-    @Bean
-    @ConfigurationProperties(prefix = "droid")
-    fun createDroid(): Droid {
-        return Droid()
-    }
+    
 }
 

@@ -10,12 +10,12 @@ class CoffeeController(private val coffeeRepository: CoffeeRepository) {
 
     init {
         coffeeRepository.saveAll(
-                listOf(
-                        Coffee("Coffee1"),
-                        Coffee("Coffee2"),
-                        Coffee("Coffee3"),
-                        Coffee("Coffee4")
-                )
+            listOf(
+                Coffee("Coffee1"),
+                Coffee("Coffee2"),
+                Coffee("Coffee3"),
+                Coffee("Coffee4")
+            )
         )
     }
 
@@ -36,10 +36,11 @@ class CoffeeController(private val coffeeRepository: CoffeeRepository) {
 
     @PutMapping("/{id}")
     fun putCoffee(@PathVariable id: String, @RequestBody coffee: Coffee): ResponseEntity<Coffee> {
-        return ResponseEntity(coffeeRepository.save(coffee), if (coffeeRepository.existsById(id))
-            HttpStatus.OK
-        else
-            HttpStatus.CREATED
+        return ResponseEntity(
+            coffeeRepository.save(coffee), if (coffeeRepository.existsById(id))
+                HttpStatus.OK
+            else
+                HttpStatus.CREATED
         )
     }
 
