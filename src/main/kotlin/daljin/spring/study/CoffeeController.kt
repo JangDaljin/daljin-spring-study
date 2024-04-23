@@ -1,47 +1,32 @@
 package daljin.spring.study
 
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("/coffee")
 class CoffeeController(private val coffeeRepository: CoffeeRepository) {
 
-    init {
-        coffeeRepository.saveAll(
-            listOf(
-                Coffee("Coffee1"),
-                Coffee("Coffee2"),
-                Coffee("Coffee3"),
-                Coffee("Coffee4")
-            )
-        )
-    }
-
     @GetMapping
-    fun getCoffeeList(): ResponseEntity<List<Coffee>> {
-        return ResponseEntity(coffeeRepository.findAll().toList(), HttpStatus.OK)
+    fun getCoffeeList(): Flux<Coffee> {
+        return coffeeRepository.findAll()
     }
 
     @GetMapping("/{id}")
-    fun getCoffeeById(@PathVariable id: String): ResponseEntity<Coffee> {
-        return ResponseEntity(coffeeRepository.findById(id).orElseThrow(), HttpStatus.OK)
+    fun getCoffeeById(@PathVariable id: String): Mono<Coffee> {
+        return coffeeRepository.findById(id)
     }
 
     @PostMapping
-    fun postCoffee(@RequestBody coffee: Coffee): ResponseEntity<Coffee> {
-        return ResponseEntity(coffeeRepository.save(coffee), HttpStatus.CREATED)
+    fun postCoffee(@RequestBody coffee: Coffee): Mono<Coffee> {
+        return coffeeRepository.save(coffee)
     }
 
     @PutMapping("/{id}")
-    fun putCoffee(@PathVariable id: String, @RequestBody coffee: Coffee): ResponseEntity<Coffee> {
-        return ResponseEntity(
-            coffeeRepository.save(coffee), if (coffeeRepository.existsById(id))
-                HttpStatus.OK
-            else
-                HttpStatus.CREATED
-        )
+    fun putCoffee(@PathVariable id: String, @RequestBody coffee: Coffee): Mono<Coffee> {
+        return coffeeRepository.save(coffee)
+
     }
 
     @DeleteMapping("/{id}")

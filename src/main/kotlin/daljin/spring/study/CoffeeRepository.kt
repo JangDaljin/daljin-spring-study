@@ -1,5 +1,5 @@
 package daljin.spring.study
 
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.r2dbc.repository.R2dbcRepository
 
-interface CoffeeRepository : CrudRepository<Coffee , String>
+interface CoffeeRepository : R2dbcRepository<Coffee, String>
