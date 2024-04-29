@@ -25,9 +25,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    runtimeOnly("io.r2dbc:r2dbc-h2")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
